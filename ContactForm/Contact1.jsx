@@ -3,7 +3,25 @@ import styles from "./Contact.module.css";
 import { MdMessage } from "react-icons/md";
 import { IoMdCall } from "react-icons/io";
 import { MdEmail } from "react-icons/md";
+import { useState } from "react";
 function Contact1() {
+  const [name,setName]=useState("");
+  const [email, setEmail]=useState("");
+  const [text, setText] = useState("");
+
+
+  const onSubmit = (event) =>{
+    event.preventDefault();
+
+    setName(event.target[0].value);
+    setEmail(event.target[1].value);
+    setText(event.target[2].value);
+
+    console.log("name",event.target[0].value);
+    console.log("email",event.target[1].value);
+    console.log("text",event.target[2].value)
+  }
+
   return (
     <section className={styles.container}>
       <div className={styles.contact_form}>
@@ -23,7 +41,7 @@ function Contact1() {
           icons={<MdEmail fontSize="25px" />}
         />
 
-        <form>
+        <form onSubmit={onSubmit}>
           <div className={styles.form_control}>
             <label htmlFor="name">Name</label>
             <input type="text" name="name" />
@@ -45,6 +63,12 @@ function Contact1() {
           </div>
             <div className={styles.contact_image}>
                 <img src="/images/contact.png" alt="Contact Image" />
+            </div>
+
+            <div>
+              {
+                name + " "+ email + " " + text
+              }
             </div>
         </form>
       </div>
